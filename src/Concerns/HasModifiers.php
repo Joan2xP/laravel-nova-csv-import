@@ -9,9 +9,11 @@ use SimonHamp\LaravelNovaCsvImport\Modifiers\Boolean;
 use SimonHamp\LaravelNovaCsvImport\Modifiers\DefaultValue;
 use SimonHamp\LaravelNovaCsvImport\Modifiers\ExcelDate;
 use SimonHamp\LaravelNovaCsvImport\Modifiers\Hash;
+use SimonHamp\LaravelNovaCsvImport\Modifiers\MoneytoNum;
 use SimonHamp\LaravelNovaCsvImport\Modifiers\Prefix;
 use SimonHamp\LaravelNovaCsvImport\Modifiers\Str as StrModifier;
 use SimonHamp\LaravelNovaCsvImport\Modifiers\Suffix;
+
 
 trait HasModifiers
 {
@@ -30,6 +32,7 @@ trait HasModifiers
             new Hash,
             new Prefix,
             new Suffix,
+            new MoneytoNum
         );
     }
 

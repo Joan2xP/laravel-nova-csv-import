@@ -19,6 +19,8 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use SimonHamp\LaravelNovaCsvImport\Concerns\HasModifiers;
 
+use Storage;
+
 class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, WithBatchInserts, WithChunkReading, SkipsOnFailure, SkipsOnError, SkipsEmptyRows
 {
     use Importable, SkipsFailures, SkipsErrors, HasModifiers;
@@ -49,7 +51,7 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
         $data = [];
 
         foreach ($this->attribute_map as $attribute => $column) {
-            if (! $column) {
+            if (!$column) {
                 continue;
             }
 
@@ -66,7 +68,24 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
     {
         $model = $this->resource::newModel();
 
+
+
+        foreach ($row as $key => $value) {
+
+            $nomParts = explode("_", $key);
+            if ($nomParts[0] == "translations") {
+
+                $model->setTranslation($nomParts[1], $nomParts[2], $value);
+                unset($row[$key]);
+            } else {
+            // Storage::append('file.log', json_encode($model->relationsToArray()));
+
+            }
+        }
         $model->fill($row);
+
+
+
 
         return $model;
     }
@@ -100,7 +119,7 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
 
     public function getMeta($key = null)
     {
-        if ($key && ! empty($this->meta_values[$key])) {
+        if ($key && !empty($this->meta_values[$key])) {
             return $this->meta_values[$key];
         }
 
