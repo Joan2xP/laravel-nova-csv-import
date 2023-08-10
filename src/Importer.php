@@ -19,13 +19,16 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use SimonHamp\LaravelNovaCsvImport\Concerns\HasModifiers;
 
-use Storage;
+use Illuminate\Support\Facades\DB;
+
 
 class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, WithBatchInserts, WithChunkReading, SkipsOnFailure, SkipsOnError, SkipsEmptyRows
 {
     use Importable, SkipsFailures, SkipsErrors, HasModifiers;
 
     protected Resource $resource;
+
+    protected $resourceFields = [];
 
     protected $attribute_map = [];
 
@@ -69,20 +72,47 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
         $model = $this->resource::newModel();
 
 
-
-        foreach ($row as $key => $value) {
-
-            $nomParts = explode("_", $key);
-            if ($nomParts[0] == "translations") {
-
-                $model->setTranslation($nomParts[1], $nomParts[2], $value);
-                unset($row[$key]);
-            } else {
-            // Storage::append('file.log', json_encode($model->relationsToArray()));
-
-            }
+        if ($this->resourceFields == []) {
+            $this->resourceFields = json_decode(json_encode($this->resource), true)["fields"];
         }
-        $model->fill($row);
+
+        DB::beginTransaction();
+        try {
+            $model->fill($row);
+            foreach ($row as $key => $value) {
+                foreach ($this->resourceFields as $field) {
+                    if (isset($field["belongsToRelationship"]) && $field["belongsToRelationship"] == $key) {
+                        $model_name = sprintf('App\Models\%s', $field["indexName"]);
+                        $tipus =   $model_name::firstOrCreate(["nom" => $value]);
+
+                        $model->$key()->associate($tipus);
+                    } else if (isset($field["component"]) && $field["component"] == "BelongsToManyField" && $field["attribute"] == $key) {
+                        $model->save();
+
+                        $tags = explode(" ", $value);
+
+                        foreach ($tags as $tag) {
+                            $model_name = sprintf('App\Models\%s', Str::singular(ucfirst($field["attribute"])));
+                            $tag_model = $model_name::firstOrCreate(["nom" => $tag]);
+
+                            $model->$key()->attach($tag_model);
+                        }
+                    }
+                }
+
+                $nomParts = explode("_", $key);
+                if ($nomParts[0] == "translations") {
+
+                    $model->setTranslation($nomParts[1], $nomParts[2], $value);
+                    unset($row[$key]);
+                }
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+
+
 
 
 

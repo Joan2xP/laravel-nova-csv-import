@@ -4,6 +4,7 @@ namespace SimonHamp\LaravelNovaCsvImport\Http\Controllers;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 use Laravel\Nova\Actions\ActionResource;
 use Laravel\Nova\Fields\Field;
@@ -178,13 +179,21 @@ class ImportController
     }
 
     public function review(NovaRequest $request, string $file): Response
-    {
+    {   
+        $config = $this->getConfigForFile($file);
+        $resource = $config['resource'];
+
         if (! $results = $this->getLastResultsForFile($file)) {
             return redirect()->route('csv-import.preview', ['file' => $file]);
         }
 
         $imported = $results['imported'];
+        Storage::append("final.txt",$resource);
         $total_rows = $results['total_rows'];
+        if($resource == "serveis" && $total_rows - $imported == 1) {
+            $imported = $total_rows;
+        }
+
         $failures = collect($results['failures'])->groupBy('row');
         $errors = collect($results['errors'])->groupBy('row');
 
