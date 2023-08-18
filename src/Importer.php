@@ -21,7 +21,6 @@ use SimonHamp\LaravelNovaCsvImport\Concerns\HasModifiers;
 
 use Illuminate\Support\Facades\DB;
 
-
 class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, WithBatchInserts, WithChunkReading, SkipsOnFailure, SkipsOnError, SkipsEmptyRows
 {
     use Importable, SkipsFailures, SkipsErrors, HasModifiers;
@@ -74,6 +73,7 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
 
         if ($this->resourceFields == []) {
             $this->resourceFields = json_decode(json_encode($this->resource), true)["fields"];
+
         }
 
         DB::beginTransaction();
@@ -81,12 +81,14 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
             $model->fill($row);
             foreach ($row as $key => $value) {
                 foreach ($this->resourceFields as $field) {
+                    
+
                     if (isset($field["belongsToRelationship"]) && $field["belongsToRelationship"] == $key) {
                         $model_name = sprintf('App\Models\%s', $field["indexName"]);
                         $tipus =   $model_name::firstOrCreate(["nom" => $value]);
 
                         $model->$key()->associate($tipus);
-                    } else if (isset($field["component"]) && $field["component"] == "BelongsToManyField" && $field["attribute"] == $key) {
+                    } else if (isset($field["component"]) && $field["component"] == "select-plus" && $field["attribute"] == $key) {
                         $model->save();
 
                         $tags = explode(",", $value);
