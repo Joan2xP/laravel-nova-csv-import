@@ -89,7 +89,7 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
                     } else if (isset($field["component"]) && $field["component"] == "BelongsToManyField" && $field["attribute"] == $key) {
                         $model->save();
 
-                        $tags = explode(" ", $value);
+                        $tags = explode(", ", $value);
 
                         foreach ($tags as $tag) {
                             $model_name = sprintf('App\Models\%s', Str::singular(ucfirst($field["attribute"])));
