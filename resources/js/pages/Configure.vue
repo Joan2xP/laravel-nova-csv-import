@@ -98,11 +98,11 @@
                     v-if="field.rules.includes('required')"
                     disabled
                   >
-                    - El camp és requerid -
+                    - El camp és requerit -
                   </option>
                   <option value="" v-else>- Deixar el camp buit -</option>
 
-                  <optgroup label="File columns">
+                  <optgroup label="Columnes de l'arxiu">
                     <option v-for="heading in headings" :value="heading">
                       {{ heading }}
                     </option>
@@ -125,7 +125,7 @@
                     </option>
                   </optgroup>
 
-                  <optgroup label="Custom - same for all">
+                  <optgroup label="Personalitzat - ho mateix per tots">
                     <option value="custom">Un valor</option>
                   </optgroup>
                 </SelectControl>
