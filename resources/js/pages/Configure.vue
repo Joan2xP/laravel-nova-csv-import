@@ -225,7 +225,7 @@
           &leftarrow; Puja un arxiu diferent
         </LinkButton>
         <DefaultButton :disabled="disabledSave" @click="saveConfig">
-          {{ saving ? "Importing..." : "Save &amp; Preview &rightarrow;" }}
+          {{ saving ? "Important..." : "Guarda &amp; Previsualitza &rightarrow;" }}
         </DefaultButton>
       </div>
     </card>
