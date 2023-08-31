@@ -1,17 +1,17 @@
 <template>
     <div>
         <Head>
-            <title>Import Preview</title>
+            <title>Vista prèvia de l'import</title>
         </Head>
 
-        <heading class="mb-6">CSV Import - Preview</heading>
+        <heading class="mb-6">Vista prèvia de l'import</heading>
 
         <card class="flex flex-col" style="min-height: 300px">
             <div class="p-8 space-y-4">
                 <p>
-                    You've selected to import <b>{{ mapped_columns.length }}</b> field(s) from <b>{{ total_rows }}</b>
-                    record(s) in total, into your <b>{{ resource }}</b> resource. The following is a sample of what this
-                    data will look like once imported.
+                    Has seleccionat importar <b>{{ mapped_columns.length }}</b> camp(s) des de <b>{{ total_rows }}</b>
+                    entrade(s) en total, en el teu <b>{{ resource }}</b> recurs. El següent és una mostra de com es veuran 
+                    les dades un cop importades.
                 </p>
 
                 <div class="overflow-scroll">
@@ -25,7 +25,7 @@
                             </tr>
                             <tr>
                                 <th v-for="(column, field) in columns">
-                                    <i v-if="! column">unmapped</i>
+                                    <i v-if="! column">sense mapejar</i>
                                     <span v-else>&downarrow;</span>
                                 </th>
                             </tr>
@@ -39,7 +39,7 @@
                                 <td v-for="(column, field) in columns" class="group-hover:bg-gray-50">
                                     <code>
                                         {{ row[field] }}
-                                        <i v-if="! row[field]">null</i>
+                                        <i v-if="! row[field]">res</i>
                                     </code>
                                 </td>
                             </tr>
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="flex justify-center space-x-2">
-                    <LinkButton @click="reconfigure"><HeroiconsOutlineRewind /> Reconfigure</LinkButton>
+                    <LinkButton @click="reconfigure"><HeroiconsOutlineRewind /> Reconfigurar</LinkButton>
                     
                     <DefaultButton :disabled="importing" @click="runImport" ref="import">
                         {{ importing ? 'Importing...' : 'Import &rightarrow;' }}
@@ -94,7 +94,7 @@ export default {
                 })
                 .catch((e) => {
                     this.importing = false;
-                    Nova.error('There were problems importing some of your data');
+                    Nova.error('Han hagur problemes en algunes de les teves dades');
                 });
 
             this.importing = false;

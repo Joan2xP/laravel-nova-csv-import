@@ -34,9 +34,9 @@ class UploadController
         try {
             $this->importer->toCollection($file);
         } catch (\Exception $e) {
-            Log::error('Failed to parse uploaded file', [$e]);
+            Log::error("No s'ha pogut analitzar l'arxiu pujat", [$e]);
 
-            return response()->json(['message' => 'Sorry, we could not import that file'], 422);
+            return response()->json(['message' => "No s'ha pogut importar l'arxiu"], 422);
         }
 
         $new_filename = implode('.', [

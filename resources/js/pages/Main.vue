@@ -1,25 +1,17 @@
 <template>
     <div>
         <Head>
-            <title>Import data</title>
+            <title>Importar dades</title>
         </Head>
 
-        <heading class="mb-6">CSV Import</heading>
+        <heading class="mb-6">Importar</heading>
 
         <card class="flex flex-col items-center justify-center" style="min-height: 300px">
             <!-- TODO: Put some history here -->
             <!-- TODO: Replace with Nova's own file field for sexier results -->
             <input type="file" name="file" ref="file" @change="handleFile" class="mb-3">
-            <DefaultButton v-bind:disabled="!file" @click="upload">Upload &amp; Configure &rightarrow;</DefaultButton>
+            <DefaultButton v-bind:disabled="!file" @click="upload">Pujar &amp; Configurar &rightarrow;</DefaultButton>
         </card>
-
-        <p class="mt-8 text-center">
-            Is <b>CSV Import</b> helping you work faster?<br>
-            Please consider
-            <a href="https://github.com/sponsors/simonhamp" target="_blank" class="text-primary-500 hover:text-primary-400 font-bold">
-                sponsoring me
-            </a>
-        </p>
     </div>
 </template>
 
@@ -54,7 +46,7 @@ export default {
                     }
                 )
                 .then((response) => {
-                    Nova.success('File uploaded!')
+                    Nova.success('Arxiu pujat!')
                     Nova.visit(response.data.configure);
                 })
                 .catch((e) => {

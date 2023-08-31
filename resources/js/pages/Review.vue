@@ -1,18 +1,18 @@
 <template>
     <div>
         <Head>
-            <title>Review Import</title>
+            <title>Revisió de l'import</title>
         </Head>
 
-        <heading class="mb-6">CSV Import - Review</heading>
+        <heading class="mb-6">Revisió de l'import</heading>
 
         <card class="p-8 space-y-4" style="min-height: 300px">
             <p>
-                <b>{{ imported }}</b> row(s) out of {{ total_rows }} were successfully imported.
+                <b>{{ imported }}</b> fila(es) fr {{ total_rows }} s'han importat bé.
             </p>
 
             <p v-if="failures.length !== 0 && errors.length !== 0">
-                There were some errors...
+                Hi ha alguns errors...
             </p>
 
             <!-- TODO: These two should be extracted into a component as they're basically identical -->
@@ -24,11 +24,11 @@
                     <table cellpadding="10">
                         <thead class="border-b">
                             <tr>
-                                <th>Row #</th>
-                                <th>Attribute</th>
-                                <th>Data</th>
-                                <th>Details</th>
-                                <th>Row Data</th>
+                                <th>Fila #</th>
+                                <th>Atribut</th>
+                                <th>Dades</th>
+                                <th>Detalls</th>
+                                <th>Dades de la fila</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +59,7 @@
                                                     {{ config.mappings[key] }} &rightarrow; {{ key }} :
                                                     <code>
                                                         {{ value }}
-                                                        <i v-if="! value">null</i>
+                                                        <i v-if="! value">res</i>
                                                     </code>
                                                 </div>
                                             </div>
@@ -80,11 +80,11 @@
                     <table cellpadding="10">
                         <thead class="border-b">
                             <tr>
-                                <th>Row #</th>
-                                <th>Attribute</th>
-                                <th>Data</th>
-                                <th>Details</th>
-                                <th>Row Data</th>
+                                <th>Fila #</th>
+                                <th>Atribut</th>
+                                <th>Dades</th>
+                                <th>Detalls</th>
+                                <th>Dades de la fila</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,7 +115,7 @@
                                                     {{ config.mappings[key] }} &rightarrow; {{ key }} :
                                                     <code>
                                                         {{ value }}
-                                                        <i v-if="! value">null</i>
+                                                        <i v-if="! value">res</i>
                                                     </code>
                                                 </div>
                                             </div>
@@ -129,8 +129,8 @@
             </template>
 
             <div class="flex justify-center">
-                <LinkButton @click="reconfigure"><HeroiconsOutlineRewind /> Reconfigure</LinkButton>
-                <LinkButton @click="restart"><HeroiconsOutlineRefresh /> Upload another</LinkButton>
+                <LinkButton @click="reconfigure"><HeroiconsOutlineRewind /> Reconfigurar</LinkButton>
+                <LinkButton @click="restart"><HeroiconsOutlineRefresh /> Pujar un altre</LinkButton>
             </div>
         </card>
     </div>
