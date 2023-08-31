@@ -78,7 +78,7 @@ class ToolServiceProvider extends ServiceProvider
                 $importable = \Maatwebsite\Excel\Concerns\Importable::class;
 
                 if (! in_array($importable, class_uses($class))) {
-                    throw new \Exception("Importer [{$class}] must use the Importable trait: {$importable}");
+                    throw new \Exception("L'importador [{$class}] ha de fer servir el tret: {$importable}");
                 }
 
                 return $this->app->make($class);
