@@ -18,7 +18,7 @@
             <!-- TODO: These two should be extracted into a component as they're basically identical -->
             <template v-if="failures.length !== 0">
                 <BasicButton @click="showFailures = !showFailures">
-                    {{ showFailures ? 'Hide failures' : 'Show failures' }}
+                    {{ showFailures ? 'Amaga errors' : 'Mostra errors' }}
                 </BasicButton>
                 <div v-if="showFailures">
                     <table cellpadding="10">
