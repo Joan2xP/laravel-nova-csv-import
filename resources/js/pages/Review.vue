@@ -52,7 +52,7 @@
                                     <td :rowspan="row.length" valign="top">
                                         <div v-if="index === 0">
                                             <BasicButton @click="showFailureData[rowIndex] = !showFailureData[rowIndex]">
-                                                {{ showFailureData[rowIndex] ? 'Hide data' : 'Show all row data' }}
+                                                {{ showFailureData[rowIndex] ? 'Amaga les dades' : 'Mostra totes les dades de la fila' }}
                                             </BasicButton>
                                             <div v-show="showFailureData[rowIndex]">
                                                 <div v-for="(value, key) in problem.values">
@@ -108,7 +108,7 @@
                                     <td :rowspan="row.length" valign="top">
                                         <div v-if="index === 0">
                                             <BasicButton @click="showErrorData[rowIndex] = !showErrorData[rowIndex]">
-                                                {{ showErrorData[rowIndex] ? 'Hide data' : 'Show all row data' }}
+                                                {{ showErrorData[rowIndex] ? 'Amaga les dades' : 'Mostra totes les dades de la fila' }}
                                             </BasicButton>
                                             <div v-show="showErrorData[rowIndex]">
                                                 <div v-for="(value, key) in problem.values">
