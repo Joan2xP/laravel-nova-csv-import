@@ -51,7 +51,7 @@
                     <LinkButton @click="reconfigure"><HeroiconsOutlineRewind /> Reconfigurar</LinkButton>
                     
                     <DefaultButton :disabled="importing" @click="runImport" ref="import">
-                        {{ importing ? 'Importing...' : 'Import &rightarrow;' }}
+                        {{ importing ? 'Important...' : 'Importar &rightarrow;' }}
                     </DefaultButton>
                 </div>
             </div>

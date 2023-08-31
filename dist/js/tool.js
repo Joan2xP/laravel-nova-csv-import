@@ -769,7 +769,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ref: "import"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.importing ? 'Importing...' : 'Import →'), 1 /* TEXT */)];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.importing ? 'Important...' : 'Importar →'), 1 /* TEXT */)];
         }),
 
         _: 1 /* STABLE */
