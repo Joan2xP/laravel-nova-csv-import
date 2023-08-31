@@ -111,7 +111,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       };
       Nova.request().post(this.url("configure"), data).then(function (response) {
         if (response.status === 200) {
-          Nova.success("Configuration saved");
+          Nova.success("Configuració guardada");
           Nova.visit("/csv-import/preview/" + _this.file);
         }
       })["catch"](function (e) {

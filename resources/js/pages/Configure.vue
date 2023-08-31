@@ -325,7 +325,7 @@ export default {
         .post(this.url("configure"), data)
         .then((response) => {
           if (response.status === 200) {
-            Nova.success("Configuration saved");
+            Nova.success("Configuració guardada");
             Nova.visit("/csv-import/preview/" + this.file);
           }
         })
