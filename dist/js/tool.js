@@ -237,7 +237,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       Nova.request().post(this.url('import'), data).then(function (response) {
         if (response.status === 200) {
-          Nova.success('Importing...');
+          Nova.success('Important...');
           Nova.visit('/csv-import/review/' + _this.file);
         }
       })["catch"](function (e) {
@@ -887,7 +887,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.imported), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" fila(es) fr " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.total_rows) + " s'han importat bé. ", 1 /* TEXT */)]), $props.failures.length !== 0 && $props.errors.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_2, " Hi ha alguns errors... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" TODO: These two should be extracted into a component as they're basically identical "), $props.failures.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.imported), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" fila(es) de " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.total_rows) + " s'han importat bé. ", 1 /* TEXT */)]), $props.failures.length !== 0 && $props.errors.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_2, " Hi ha alguns errors... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" TODO: These two should be extracted into a component as they're basically identical "), $props.failures.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 1
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BasicButton, {
         onClick: _cache[0] || (_cache[0] = function ($event) {

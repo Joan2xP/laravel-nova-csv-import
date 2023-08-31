@@ -88,7 +88,7 @@ export default {
                 .post(this.url('import'), data)
                 .then((response) => {
                     if (response.status === 200) {
-                        Nova.success('Importing...');
+                        Nova.success('Important...');
                         Nova.visit('/csv-import/review/' + this.file);
                     }
                 })

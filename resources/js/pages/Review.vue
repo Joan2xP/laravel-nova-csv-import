@@ -8,7 +8,7 @@
 
         <card class="p-8 space-y-4" style="min-height: 300px">
             <p>
-                <b>{{ imported }}</b> fila(es) fr {{ total_rows }} s'han importat bé.
+                <b>{{ imported }}</b> fila(es) de {{ total_rows }} s'han importat bé.
             </p>
 
             <p v-if="failures.length !== 0 && errors.length !== 0">
