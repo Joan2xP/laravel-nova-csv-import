@@ -10,7 +10,7 @@
             <div class="p-8 space-y-4">
                 <p>
                     Has seleccionat importar <b>{{ mapped_columns.length }}</b> camp(s) des de <b>{{ total_rows }}</b>
-                    entrade(s) en total, en el teu recurs<b>{{ resource }}</b>. El següent és una mostra de com es veuran 
+                    entrade(s) en total, en el teu recurs <b>{{ resource }}</b>. El següent és una mostra de com es veuran 
                     les dades un cop importades.
                 </p>
 
