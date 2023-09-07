@@ -3,6 +3,7 @@
 namespace SimonHamp\LaravelNovaCsvImport;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Nova\Resource;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -78,18 +79,38 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
 
         DB::beginTransaction();
         try {
+            $model->unguard();
             $model->fill($row);
+            // Storage::append("init.log", json_encode(($model->id)));
             foreach ($row as $key => $value) {
                 foreach ($this->resourceFields as $field) {
-                    
+
 
                     if (isset($field["belongsToRelationship"]) && $field["belongsToRelationship"] == $key) {
+                        unset($model[$key]);
                         $model_name = sprintf('App\Models\%s', $field["indexName"]);
-                        $tipus =   $model_name::firstOrCreate(["nom" => $value]);
+                        $tipus = $model_name::firstOrCreate(["nom" => $value]);
 
                         $model->$key()->associate($tipus);
-                    } else if (isset($field["component"]) && $field["component"] == "select-plus" && $field["attribute"] == $key) {
+                    }
+                }
+
+                $nomParts = explode("_", $key);
+                if ($nomParts[0] == "translations") {
+
+                    $model->setTranslation($nomParts[1], $nomParts[2], $value);
+                    unset($row[$key]);
+                    unset($model[$key]);
+                }
+            }
+
+            foreach ($row as $key => $value) {
+                foreach ($this->resourceFields as $field) {
+                    if (isset($field["component"]) && $field["component"] == "select-plus" && $field["attribute"] == $key) {
+                        // Storage::append("init2.log", json_encode($model));
+                        unset($model[$key]);
                         $model->save();
+                        // Storage::append("init2.log", json_encode($model));
 
                         $tags = explode(",", $value);
 
@@ -101,16 +122,10 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
                         }
                     }
                 }
-
-                $nomParts = explode("_", $key);
-                if ($nomParts[0] == "translations") {
-
-                    $model->setTranslation($nomParts[1], $nomParts[2], $value);
-                    unset($row[$key]);
-                }
             }
             DB::commit();
         } catch (\Exception $e) {
+            // Storage::append("storage.log", json_encode($e));
             DB::rollBack();
         }
 
@@ -184,7 +199,6 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
     public function setRules(array $rules): self
     {
         $this->rules = $rules;
-
         return $this;
     }
 
