@@ -81,17 +81,27 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
         try {
             $model->unguard();
             $model->fill($row);
-            // Storage::append("init.log", json_encode(($model->id)));
+            Storage::append("init.log", json_encode($model));
             foreach ($row as $key => $value) {
                 foreach ($this->resourceFields as $field) {
 
 
                     if (isset($field["belongsToRelationship"]) && $field["belongsToRelationship"] == $key) {
                         unset($model[$key]);
-                        $model_name = sprintf('App\Models\%s', $field["indexName"]);
-                        $tipus = $model_name::firstOrCreate(["nom" => $value]);
+                        // Storage::append("belong1.log", json_encode($value));
 
-                        $model->$key()->associate($tipus);
+                        $model_name = sprintf('App\Models\%s', $field["indexName"]);
+                        $tipus = $model_name::where("id","=",$value)->first();
+                        // Storage::append("belong1.log", json_encode($model));
+
+                        if ($tipus) {
+                            // Storage::append("belong1.log", json_encode($model));
+                            $model->$key()->associate($tipus);
+                            // Storage::append("belong1.log", json_encode($model));
+
+
+                        }
+
                     }
                 }
 
@@ -107,10 +117,10 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
             foreach ($row as $key => $value) {
                 foreach ($this->resourceFields as $field) {
                     if (isset($field["component"]) && $field["component"] == "select-plus" && $field["attribute"] == $key) {
-                        // Storage::append("init2.log", json_encode($model));
+                        Storage::append("init2a.log", json_encode($model));
                         unset($model[$key]);
                         $model->save();
-                        // Storage::append("init2.log", json_encode($model));
+                        Storage::append("init2b.log", json_encode($model));
 
                         $tags = explode(",", $value);
 
@@ -125,7 +135,7 @@ class Importer implements ToModel, WithValidation, WithHeadingRow, WithMapping, 
             }
             DB::commit();
         } catch (\Exception $e) {
-            // Storage::append("storage.log", json_encode($e));
+            Storage::append("storage.log", json_encode($e));
             DB::rollBack();
         }
 
