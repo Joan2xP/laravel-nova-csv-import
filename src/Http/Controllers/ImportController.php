@@ -188,14 +188,15 @@ class ImportController
         }
 
         $imported = $results['imported'];
-        Storage::append("final.txt",$resource);
         $total_rows = $results['total_rows'];
-        if($resource == "serveis" && $total_rows - $imported == 1) {
-            $imported = $total_rows;
-        }
+        
 
         $failures = collect($results['failures'])->groupBy('row');
         $errors = collect($results['errors'])->groupBy('row');
+
+        if($resource == "serveis" && $imported != 0) {
+            $imported = $total_rows - count($failures);
+        }
 
         $config = $this->getConfigForFile($file);
 
