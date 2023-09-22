@@ -9,13 +9,12 @@ class ExcelDate implements Modifier
 {
     public function title(): string
     {
-        return 'Excel Date Parser';
+        return "Analitzador de Dates d'Excel";
     }
 
     public function description(): string
     {
-        return 'Interprets the given value as an Excel date-time float and converts it to a DateTime object
-            and formatted according to the supplied `format` setting';
+        return "Interpreta el valor proporcionat com una data-hora decimal d'Excel i el converteix en un objecte DateTime i el formateja segons l'opció format subministrada.";
     }
 
     public function settings(): array

@@ -8,12 +8,12 @@ class MoneytoNum implements Modifier
 {
     public function title(): string
     {
-        return 'Money to number';
+        return 'Diners a número';
     }
 
     public function description(): string
     {
-        return "Turn money notation to number";
+        return "Converteix la notació monetària en un número";
     }
 
     public function settings(): array

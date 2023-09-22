@@ -9,12 +9,12 @@ class Str implements Modifier
 {
     public function title(): string
     {
-        return 'String modifiers';
+        return 'Modificadors de text';
     }
 
     public function description(): string
     {
-        return "Use some of Laravel's `Str` helper functions.";
+        return "Alguns recursos per modificar el text";
     }
 
     public function settings(): array

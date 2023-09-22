@@ -8,12 +8,12 @@ class DefaultValue implements Modifier
 {
     public function title(): string
     {
-        return 'Default Value';
+        return 'Valor per defecte';
     }
 
     public function description(): string
     {
-        return 'Set a default value for the field if the CSV column is empty or missing';
+        return 'Estableix un valor per defecte per al camp si la columna del CSV està buida o falta.';
     }
 
     public function settings(): array
@@ -21,7 +21,7 @@ class DefaultValue implements Modifier
         return [
             'string' => [
                 'type' => 'string',
-                'title' => 'Default Value',
+                'title' => 'Valor per defecte',
             ],
         ];
     }

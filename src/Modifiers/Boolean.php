@@ -8,14 +8,14 @@ class Boolean implements Modifier
 {
     public function title(): string
     {
-        return 'Boolean';
+        return 'Booleà';
     }
 
     public function description(): string
     {
-        return "Converts the value to a strict boolean. The following values are considered `false`:
-            false, 'false', 0, '0', '', 'off', 'no', null
-            Everything else is considered `true`";
+        return "Converteix el valor a un booleà estrict. Es consideren falsos els següents valors:
+        false, 'false', 0, '0', '', 'off', 'no', null
+        Tot el demés es considera cert.";
     }
 
     public function settings(): array

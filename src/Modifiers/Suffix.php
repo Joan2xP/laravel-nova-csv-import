@@ -9,12 +9,12 @@ class Suffix implements Modifier
 {
     public function title(): string
     {
-        return 'Suffix value';
+        return 'Sufix';
     }
 
     public function description(): string
     {
-        return 'Suffix each row with a given string';
+        return 'Afegeix un sufix a cada fila amb el text proporcionat.';
     }
 
     public function settings(): array

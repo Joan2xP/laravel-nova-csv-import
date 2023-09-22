@@ -9,12 +9,12 @@ class Prefix implements Modifier
 {
     public function title(): string
     {
-        return 'Prefix value';
+        return 'Prefix';
     }
 
     public function description(): string
     {
-        return 'Prefix each row with a given string';
+        return 'Afegeix un prefix a cada fila amb una cadena proporcionada.';
     }
 
     public function settings(): array

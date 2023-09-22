@@ -8,7 +8,7 @@ class Hash implements Modifier
 {
     public function title(): string
     {
-        return 'Hash value';
+        return 'Valor hash';
     }
 
     public function description(): string
